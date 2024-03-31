@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+    </style>
+    </head>
+
+<body>
+  <div class="container">
+    <h1>Expense Tracker</h1>
+    <form id="expenseForm">
+      <input type="text" id="expenseInput" placeholder="Enter expense">
+      <button type="submit">Add Expense</button>
+    </form>
+    <ul id="expenseList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const expenseForm = document.getElementById('expenseForm');
+  const expenseInput = document.getElementById('expenseInput');
+  const expenseList = document.getElementById('expenseList');
+
+  expenseForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const expenseText = expenseInput.value.trim();
+    if (expenseText !== '') {
+      addExpense(expenseText);
+      expenseInput.value = '';
+    }
+  });
+
+  function addExpense(expenseText) {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${expenseText}</span>
+      <button class="delete-btn">Delete</button>
+    `;
+    expenseList.appendChild(li);
+  }
+
+  expenseList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-btn')) {
+      e.target.parentElement.remove();
+    }
+  });
+});
+
+    </script>
+
+
+</body>
+</html>
